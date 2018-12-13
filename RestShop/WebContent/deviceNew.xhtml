@@ -1,0 +1,77 @@
+<!--
+	Bildungszentrum Zürichsee BZZ
+  Fachgruppe IT
+  
+  MP-CH-133-1316-2: Webapplikationen realisieren
+  BYODManager
+  
+  @author Markus Meier, Marcel Suter
+  @date 2015-01-07
+  @version 2.0
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>BYODManager</title>
+	<meta name="author" content="Markus Meier, Marcel Suter" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<h:outputStylesheet library="css" name="default.css" />
+
+</h:head>
+<h:body>
+	<div id="header">BYOD Manager</div>
+
+	<div id="navigation">
+		<h:form rendered="#{loginBean.isAuthenticated()}">
+
+			<h:link value="Profil" outcome="personShow" />
+			<h:link value="Geräteliste" outcome="deviceList" />
+			<h:commandLink value="Abmelden" action="#{loginBean.logout()}"
+				ajax="false" />
+
+		</h:form>
+
+	</div>
+
+	<div id="content">
+		<h:form>
+
+			<h:messages id="msgs" showDetail="false" />
+			<h:panelGrid id="show" columns="2">
+				<f:facet name="header">
+                Neues Gerät erfassen
+              </f:facet>
+				<h:outputLabel for="fieldBezeichnung" value="Bezeichnung" />
+				<h:inputText id="fieldBezeichnung"
+					value="#{deviceNewBean.device.bezeichnung}" />
+
+				<h:outputLabel for="fieldHostname" value="Hostname" />
+				<h:inputText id="fieldHostname"
+					value="#{deviceNewBean.device.hostname}" />
+
+				<h:outputLabel for="fieldMac" value="MAC-Adresse" />
+				<h:inputText id="fieldMac"
+					value="#{deviceNewBean.device.macAdresse}" />
+
+				<f:facet name="footer">
+					<h:commandButton value="Speichern"
+						action="#{deviceNewBean.insert()}" ajax="false" />
+					<h:button value="Abbruch" outcome="deviceList?faces-redirect=true" />
+				</f:facet>
+			</h:panelGrid>
+		</h:form>
+	</div>
+
+	<div id="footer">
+		<hr />
+		<p>© 2017 Markus Meier, Marcel Suter / BZZ</p>
+	</div>
+
+</h:body>
+</html>
