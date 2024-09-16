@@ -1,0 +1,80 @@
+<!--
+	Bildungszentrum Zürichsee BZZ
+  Fachgruppe IT
+  
+  MP-CH-133-1316-2: Webapplikationen realisieren
+  BYODManager
+  
+  @author Raphael Stauffacher
+  @date 2017-04-13
+  @version 1.0
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+>
+
+<h:head>
+  <title>BYODManager</title>
+  <meta name="author" content="Markus Meier, Marcel Suter" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <h:outputStylesheet library="css" name="default.css" />
+
+</h:head>
+<h:body>
+  <div id="header">
+      BYOD Manager
+  </div>
+
+  <div id="navigation">
+		<h:form rendered="#{loginBean.isAuthenticated()}">
+
+			<h:link value="Profil" outcome="personShow" />
+			<h:link value="Geräteliste" outcome="deviceList" />
+			<h:commandLink value="Abmelden" action="#{loginBean.logout()}"
+				ajax="false" />
+
+		</h:form>
+
+	</div>
+
+  <div id="content">
+  
+  	<h:form>
+		<h:dataTable value="#{deviceListBean.deviceList}" var="device"
+			rowIndexVar="row">
+			<h:column>
+				<f:facet name="header">Bezeichnung</f:facet>
+				<h:outputText value="#{device.bezeichnung}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Hostname</f:facet>
+				<h:outputText value="#{device.hostname}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">MAC_Adresse</f:facet>
+				<h:outputText value="#{device.macAdresse}" />
+			</h:column>
+			<h:column>
+				<h:commandButton
+					onclick="return confirm('Willst du dieses Gerät wirklich löschen?')"
+					action="#{deviceListBean.delete(device)}"
+					value="Löschen" ajax="false">
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+		<h:button outcome="deviceNew.xhtml" value="Neues Gerät..." />
+	</h:form>
+
+  </div>
+
+  <div id="footer">
+      <hr />
+      <p>© 2017 Raphael Stauffacher / BZZ</p>
+  </div>
+
+</h:body>
+</html>

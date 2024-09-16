@@ -1,0 +1,81 @@
+<!--
+	Bildungszentrum Zürichsee BZZ
+  Fachgruppe IT
+  
+  MP-CH-133-1316-2: Webapplikationen realisieren
+  BYODManager
+  
+  @author Raphael Stauffacher
+  @date 2017-04-13
+  @version 1.0
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>BYODManager</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="author" content="Markus Meier, Marcel Suter" />
+
+	<h:outputStylesheet library="css" name="default.css" />
+
+</h:head>
+<h:body>
+	<div id="header">BYOD Manager</div>
+
+	<div id="navigation">
+		<h:form rendered="#{loginBean.isAuthenticated()}">
+
+			<h:link value="Profil" outcome="personShow" />
+			<h:link value="Geräteliste" outcome="deviceList" />
+			<h:commandLink value="Abmelden" action="#{loginBean.logout()}"
+				ajax="false" />
+
+		</h:form>
+
+	</div>
+
+	<div id="content">
+		<h:form>
+
+			<h:messages id="msgs" showDetail="false" />
+			<h:panelGrid id="show" columns="2">
+				<f:facet name="header">
+                Profil bearbeiten
+              </f:facet>
+				<h:outputLabel for="fieldBenutzername" value="Benutzername" />
+				<h:inputText id="fieldBenutzername"
+					value="#{personEditBean.person.benutzername}" />
+
+				<h:outputLabel for="fieldName" value="Name" />
+				<h:inputText id="fieldName" value="#{personEditBean.person.name}" />
+
+				<h:outputLabel for="fieldPasswort" value="Passwort:" />
+				<h:inputSecret id="fieldPasswort"
+					value="#{personEditBean.person.passwort}" />
+					
+				<h:outputLabel for="fieldEmail" value="Email" />
+				<h:inputText id="fieldEmail" value="#{personEditBean.person.email}" />
+
+				<f:facet name="footer">
+					<h:commandButton value="Speichern"
+						action="#{personEditBean.save()}" ajax="false" />
+					<h:button value="Abbruch" outcome="personShow" />
+				</f:facet>
+			</h:panelGrid>
+
+		</h:form>
+	</div>
+
+	<div id="footer">
+		<hr />
+		<p>© 2017 Markus Meier, Marcel Suter / Bildungszentrum Zürichsee
+			BZZ</p>
+	</div>
+
+</h:body>
+</html>

@@ -1,0 +1,35 @@
+/*
+	Bildungszentrum Zürichsee BZZ
+  Fachgruppe IT
+  
+  MP-CH-133-1316-2: Webapplikationen realisieren
+  BYODManager
+  
+  @author Markus Meier, Marcel Suter
+  @date 2015-01-07
+  @version 2.0
+*/
+
+ 
+body {
+	
+}
+
+#header {
+	background-color: navy;
+	font-size: 2em;
+	color: white;
+}
+
+#navigation {
+	
+}
+
+#content {
+	
+}
+
+#footer {
+	position: absolute;
+	bottom: 50px;
+}
